@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="login_area">
+    <div id="login_area">
         <h1 class="text-center"> Welcome to pionner_bank</h1>
         <div class="submit_area">
             <h4> Login</h4>
@@ -18,9 +18,94 @@
             <br>
             <input type=" password " class="form-control " placeholder="password">
             <br>
-            <button class=" btn btn-success">Enter</button>
+            <button id="loginBtn" class=" btn btn-success">Enter</button>
         </div>
     </div>
+    <div id="transition_area">
+        <div class="row">
+            <div class="col-md-4 ">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h2>$ <span id="current_deposit"> 00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$ 00</h2>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="current_balance">1240</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="submit_area">
+                    <h4>Deposit</h4>
+                    <input id="deposit_amount" type="text" class="form-control" placeholder="$ amount you want to deposit ">
+                    <br>
+                    <button id="addDeposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="submit_area">
+                    <h4>Withdraw</h4>
+                    <input type="text" class="form-control" placeholder="$ amount you want to withdraw ">
+                    <br>
+                    <button class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // login button event handler
+        const loginBtn = document.getElementById("loginBtn");
+        loginBtn.addEventListener('click', function() {
+
+            const loginArea = document.getElementById("login_area");
+            loginArea.style.display = "none";
+
+            const transitionArea = document.getElementById('transition_area');
+            transitionArea.style.display = "block";
+        })
+
+        // deposit button event handler
+
+        const depositBtn = document.getElementById("addDeposit");
+        depositBtn.addEventListener("click", function() {
+            const depositAmount = document.getElementById("deposit_amount").value;
+            const depositNumber = parseFloat(depositAmount);
+
+
+            // const currentDeposit = document.getElementById("current_deposit").innerText;
+            // const currentDepositNumber = parseFloat(currentDeposit);
+            // const totalDeposit = depositNumber + currentDepositNumber;
+            // document.getElementById("current_deposit").innerText = totalDeposit;
+            updateSpanText("current_deposit", depositNumber);
+            // const currentBalance = document.getElementById("current_balance").innerText;
+            // const currentBalanceNumber = parseFloat(currentBalance);
+            // const totalBalance = depositNumber + currentBalanceNumber;
+            // document.getElementById("current_balance").innerText = totalBalance;
+            updateSpanText("current_balance", depositNumber);
+
+
+            document.getElementById("deposit_amount").value = "";
+        })
+
+        function updateSpanText(id, depositNumber) {
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount = depositNumber + currentNumber;
+            document.getElementById(id).innerText = totalAmount;
+
+
+        }
+    </script>
 </body>
 
 </html>
